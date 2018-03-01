@@ -86,7 +86,7 @@ Mako==1.0.7
 MarkupSafe==1.0
 matplotlib==2.1.2
 mccabe==0.6.1
-menuinst==1.4.11
+menuinst
 mistune==0.8.3
 mpmath==1.0.0
 msgpack-python==0.5.1
