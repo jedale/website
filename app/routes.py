@@ -18,7 +18,6 @@ from bokeh.models import (
 	ColorBar,
 	)
 from bokeh.plotting import figure
-from bokeh.charts import Histogram
 from bokeh.embed import components
 
 
@@ -163,17 +162,3 @@ def vis_draft():
 
 	return render_template('vis_draft.html', script=script, div=div,
 	 title='NFL Draft Performance')
-
-@app.route('/testvis')
-def testvis():
-	current_feature_name = request.args.get("feature_name")
-	if current_feature_name == None:
-		current_feature_name = "Sepal Length"
-
-	# create the plot
-	plot = create_figure(current_feature_name, 10)
-
-	#embed plot into html
-	script, div = components(plot)
-	return render_template("test.html", script=script, div=div, feature_names=feature_names,
-		current_feature_name=current_feature_name)
