@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.css"
+    rel="stylesheet" type="text/css">
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.css"
+    rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block scripts %}
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+{{ super() }}
+{% endblock %}
+
+{% block app_content %}
+
+{{ script|safe }}
+{{ div|safe }}
+This visualization shows the total surplus value realized by each team in each draft year. This valuation is <i>not</i> adjusted for the number of picks the team has, but it <i>is</i> adjusted for the specific pick. For instance, if a team with the 15th pick was expected to get a value of 10 but realized a value of 11 with the player they chose, they would have a realized a surplus of five. Negative values imply the team got less value than expected; positive values imply the team got more value. 
+
+{% endblock %}
