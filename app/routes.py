@@ -129,7 +129,7 @@ def vis_draft():
 
 	source = ColumnDataSource(df)
 
-	TOOLS = "hover,save,pan,box_zoom,reset,wheel_zoom"
+	TOOLS = "hover,save,xpan,box_zoom,reset,wheel_zoom"
 
 	p = figure(title="NFL Draft Performance ({0} - {1})".format(years[0], years[-1]),
           x_range = years, y_range = list(reversed(teams)),

@@ -4,6 +4,12 @@
 
 {{ script|safe }}
 {{ div|safe }}
-This visualization shows the total surplus value realized by each team in each draft year. This valuation is <i>not</i> adjusted for the number of picks the team has, but it <i>is</i> adjusted for the specific pick. For instance, if a team with the 15th pick was expected to get a value of 10 but realized a value of 11 with the player they chose, they would have a realized a surplus of five. Negative values imply the team got less value than expected; positive values imply the team got more value. 
-
+<h3>What this shows</h3>
+Using data from <a href="https://www.pro-football-reference.com/">Pro Football Reference</a>, I created a metric I call Residual Value (RV). RV is based off of PFR's AV metric, which in turn attempts to measure the value created by a player. AV has significant limitations, as any single-dimensional metric used to evaluate a complex game must. Nonetheless, it has the attractive feature of being computable for every player (consider in contrast <a href="http://www.footballoutsiders.com/">Football Outsiders</a>' DYAR, which is only computable for skill players).
+<br><br>
+Using PFR's data, I computed the expected AV for each draft pick in each year of data by fitting a spline to the data. Formally I am computing E[AV|year,pick#]. By comparing this expectation to the actual AV created by the player, I can generate my RV metric. Positive RV means a team did better than expected, given that year and that pick. Negative RV means a team did worse. By construction AV--and thus RV--can be meaningfully summed, which means it is possible to consider how much RV a team accumulated with each draft class.
+<br><br>
+Some notes on the above plot: first, because AV is a counting stat players who have been in the year longer will have accumulated more AV, and thus potentially more RV. This is why comparatively earlier years show more intense heat values, whereas more recent years have heat values biased toward zero. I experimented with some ways of normalizing to generate consistent heat values across years but found none that worked. In a sense I think having less extreme heat values in more recent drafts makes sense; it reflects that we simply have less information about how these draft classes will pan out. 
+<br><br>
+Second, the above shows <i>total</i> residual value for each year. While this is by construction adjusted for the specific picks a team had, it does not account for the fact that some teams have more or fewer picks in a given year (picks can be traded, as the Seahawks did in 2015; offering up their first round pick in exchange for Jimmy Graham), granted (teams are given so-called compensatory picks for losing players in free agency), and even taken away (the Seahawks lost picks a couple of years ago for violating limits on preseason practices). A plot of pick efficiency is forthcoming. 
 {% endblock %}
