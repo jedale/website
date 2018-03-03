@@ -16,6 +16,7 @@ from bokeh.models import (
 	BasicTicker,
 	PrintfTickFormatter,
 	ColorBar,
+	Range1d
 	)
 from bokeh.plotting import figure
 from bokeh.embed import components
@@ -111,11 +112,16 @@ def analysis():
 def visualizations():
 	return render_template('visualizations.html', title='Visualizations')
 
-@app.route('/visualizations/draft')
+@app.route('/visualizations/draft', methods=['GET', 'POST'])
 def vis_draft():
+	# TODO: custom start and end here
+	start = 2010
+	end = 2017
+	x_range = Range1d(start-0.5, end+0.5, bounds=(1990-0.5, 2017+0.5))
+
 	# draft_vis.data is preformatted to display properly.
 	# TODO: code to build it if it doesn't already exist
-	df = pd.read_csv('data/draft_vis.data')
+	df = pd.read_csv('data/draftRVSum.data')
 
 	# unfortunately have to change a type to make bokeh happy
 	df.Year = df.Year.astype(str)
@@ -131,13 +137,14 @@ def vis_draft():
 
 	TOOLS = "hover,save,xpan,box_zoom,reset,wheel_zoom"
 
-	p = figure(title="NFL Draft Performance ({0} - {1})".format(years[0], years[-1]),
-          x_range = years, y_range = list(reversed(teams)),
+	p = figure(title="NFL Draft Performance ({0} - {1})".format(start, end),
+          x_range = x_range, y_range = list(reversed(teams)),
           x_axis_location="above", plot_width=600, plot_height=600,
           tools=TOOLS, toolbar_location="below")
 	p.grid.grid_line_color = None
 	p.axis.axis_line_color = None
 	p.axis.major_tick_line_color = None
+	p.axis.minor_tick_line_color = None
 	p.axis.major_label_text_font_size = "10pt"
 	p.axis.major_label_standoff = 0
 
