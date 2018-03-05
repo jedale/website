@@ -1,5 +1,5 @@
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, PlotChoiceForm
 from app.models import User
 
 from flask import render_template, flash, redirect, url_for, request
@@ -114,7 +114,11 @@ def visualizations():
 
 @app.route('/visualizations/draft', methods=['GET', 'POST'])
 def vis_draft():
+	form = PlotChoiceForm()
+
 	# TODO: custom start and end here
+	# TODO: put plot stuff in its own function
+
 	start = 2010
 	end = 2017
 	x_range = Range1d(start-0.5, end+0.5, bounds=(1990-0.5, 2017+0.5))
@@ -137,7 +141,8 @@ def vis_draft():
 
 	TOOLS = "hover,save,xpan,box_zoom,reset,wheel_zoom"
 
-	p = figure(title="NFL Draft Performance ({0} - {1})".format(start, end),
+	# TODO: properly set title
+	p = figure(title="NFL Draft Performance ({0} - {1})".format(1990, 2017),
           x_range = x_range, y_range = list(reversed(teams)),
           x_axis_location="above", plot_width=600, plot_height=600,
           tools=TOOLS, toolbar_location="below")
@@ -168,4 +173,4 @@ def vis_draft():
 	script, div = components(p)
 
 	return render_template('vis_draft.html', script=script, div=div,
-	 title='NFL Draft Performance')
+		form = form, title='NFL Draft Performance')

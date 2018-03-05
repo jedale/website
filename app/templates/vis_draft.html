@@ -1,9 +1,11 @@
 {% extends "graphs.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
 
 {{ script|safe }}
 {{ div|safe }}
+{{ wtf.quick_form(form) }}
 <h3>What this shows</h3>
 Using data from <a href="https://www.pro-football-reference.com/">Pro Football Reference</a>, I created a metric I call Residual Value (RV). RV is based off of PFR's AV metric, which in turn attempts to measure the value created by a player. AV has significant limitations, as any single-dimensional metric used to evaluate a complex game must. Nonetheless, it has the attractive feature of being computable for every player (consider in contrast <a href="http://www.footballoutsiders.com/">Football Outsiders</a>' DYAR, which is only computable for skill players).
 <br><br>

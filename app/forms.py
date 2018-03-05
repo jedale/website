@@ -1,7 +1,7 @@
 from app.models import User
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 
 class LoginForm(FlaskForm):
@@ -27,3 +27,7 @@ class RegistrationForm(FlaskForm):
 		user = User.query.filter_by(email=email.data).first()
 		if user is not None:
 			raise ValidationError('Email address already in use. Please choose another.')
+
+class PlotChoiceForm(FlaskForm):
+	plotchoice = SelectField(label='Plot Type?', choices=[('sum', 'Total Value'), ('mean', 'Pick Efficiency')])
+	submit = SubmitField('Choose')
