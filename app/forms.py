@@ -29,5 +29,9 @@ class RegistrationForm(FlaskForm):
 			raise ValidationError('Email address already in use. Please choose another.')
 
 class PlotChoiceForm(FlaskForm):
-	plotchoice = SelectField(label='Plot Type?', choices=[('sum', 'Total Value'), ('mean', 'Pick Efficiency')])
+	plotchoice = SelectField(label='Plot Type?', choices=[
+		('sum', 'Total Value (by team)'), 
+		('mean', 'Pick Efficiency (by team)'),
+		('possum', 'Total Value (by position)'),
+		('posmean', 'Pick Efficiency (by position)')])
 	submit = SubmitField('Choose')
