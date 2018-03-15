@@ -1,7 +1,7 @@
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, PlotChoiceForm
 from app.models import User
-from app.plots import DraftHeatmap
+from app.plots import DraftHeatmap, CapTreemap
 
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
@@ -128,3 +128,15 @@ def vis_draft():
 
 	return render_template('vis_draft.html', script=script, div=div,
 		form = form, title='NFL Draft Performance')
+
+@app.route('/visualizations/cap', methods=['GET', 'POST'])
+def vis_cap():
+
+	p = CapTreemap()
+
+	script, div = components(p)
+
+	return render_template('vis_cap.html', script=script, div=div,
+		title='NFL Salary Cap Usage')
+
+	
