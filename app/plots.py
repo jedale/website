@@ -258,8 +258,8 @@ def CapTreemap():
 
 
 	# get data
-	x_range = Range1d(0, 600)
-	y_range = Range1d(0, 600)
+	x_range = Range1d(0, 600, bounds=(0, 600))
+	y_range = Range1d(0, 600, bounds=(0, 600))
 
 	TOOLS = "hover,save"
 
@@ -267,11 +267,12 @@ def CapTreemap():
 		x_range = x_range, y_range=y_range,
 		plot_width=600, plot_height=600)
 	p.grid.grid_line_color = None
-	p.axis.axis_line_color = None
-	p.axis.major_tick_line_color = None
-	p.axis.minor_tick_line_color = None
-	p.axis.major_label_standoff = 0
-	p.axis.major_label_text_font_size = '10pt'
+	p.axis.visible = False
+	# p.axis.axis_line_color = None
+	# p.axis.major_tick_line_color = None
+	# p.axis.minor_tick_line_color = None
+	# p.axis.major_label_standoff = 0
+	# p.axis.major_label_text_font_size = '10pt'
 
 	for glyph in glyphs:
 		rect = Quad(left=glyph['x'],
