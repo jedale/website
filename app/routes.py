@@ -1,5 +1,5 @@
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, PlotChoiceForm
+from app.forms import LoginForm, RegistrationForm, PlotChoiceForm, TreemapForm
 from app.models import User
 from app.plots import DraftHeatmap, CapTreemap
 
@@ -131,12 +131,20 @@ def vis_draft():
 
 @app.route('/visualizations/cap', methods=['GET', 'POST'])
 def vis_cap():
+	form = TreemapForm()
 
-	p = CapTreemap()
+	if form.validate_on_submit():
+		team = form.team.data
+		year=  int(form.year.data)
+	else:
+		team = 'seattle-seahawks'
+		year = 2017
+
+	p = CapTreemap(team, year)
 
 	script, div = components(p)
 
 	return render_template('vis_cap.html', script=script, div=div,
-		title='NFL Salary Cap Usage')
+		form=form, title='NFL Salary Cap Usage')
 
 	
