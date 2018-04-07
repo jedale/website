@@ -16,7 +16,7 @@ from bokeh.models.glyphs import Quad, Text
 from bokeh.plotting import figure
 from bokeh.embed import components
 import squarify
-from app.treemap import Node, NFLTeam, colors, treemap, filltree, preptree
+from app.treemap import Node, NFLTeam, colors, treemap, filltree, preptree, TeamName
 
 # tree structure for salary cap visualization
 # TODO: probably some abstraction to be done here
@@ -143,7 +143,7 @@ def CapTreemap(team, year):
 
 	TOOLS = "hover,save"
 
-	p = figure(title='Seattle Seahawks Salary Cap Usage (2017)',
+	p = figure(title=TeamName[team] +' Cap Usage (' + str(year) +')',
 		x_range = x_range, y_range=y_range,
 		plot_width=600, plot_height=600)
 	p.grid.grid_line_color = None
