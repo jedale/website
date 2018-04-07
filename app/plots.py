@@ -17,6 +17,7 @@ from bokeh.plotting import figure
 from bokeh.embed import components
 import squarify
 from app.treemap import Node, NFLTeam, colors, treemap, filltree, preptree, TeamName
+from app.colors import TeamColors, colordict
 
 # tree structure for salary cap visualization
 # TODO: probably some abstraction to be done here
@@ -154,12 +155,14 @@ def CapTreemap(team, year):
 	# p.axis.major_label_standoff = 0
 	# p.axis.major_label_text_font_size = '10pt'
 
+	#TODO: mapping of team colors is an embarassment of dictionaries; 
+	# need to refactor the entire aesthetic side of this thing
 	for glyph in glyphs:
 		rect = Quad(left=glyph['x'],
 					right = glyph['x'] + glyph['dx'],
 					bottom = glyph['y'],
 					top = glyph['y'] + glyph['dy'],
-					fill_color = colors[glyph['label']])
+					fill_color = TeamColors[team][colordict[glyph['label']]])
 
 		if glyph['label'] in ['Offense', 'Defense', 'SpecialTeams']:
 			label = Label(x = glyph['x'] + glyph['dx']/2,
